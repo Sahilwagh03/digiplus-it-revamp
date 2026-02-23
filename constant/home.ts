@@ -1,32 +1,96 @@
 export const partners = [
-    {
-        name:"Ericsson",
-        blackLogo: "/partners-logo/ericsson-black.svg",
-        whiteLogo: "/partners-logo/ericsson-white.svg",
-        alt: "Ericsson Logo"
-    },
-    {
-        name:"Tele2",
-        blackLogo: "/partners-logo/tele2-black.svg",
-        whiteLogo: "/partners-logo/tele2-white.svg",
-        alt: "Tele2 Logo"
-    },
-    {
-        name:"T-Mobile",
-        blackLogo: "/partners-logo/t-mobile-black.svg",
-        whiteLogo: "/partners-logo/t-mobile-white.svg",
-        alt: "T-Mobile Logo"
-    },
-    {
-        name:"Odido",
-        blackLogo: "/partners-logo/odido-black.svg",
-        whiteLogo: "/partners-logo/odido-white.svg",
-        alt: "Odido Logo"
-    },
-    {
-        name:"WindTre",
-        blackLogo: "/partners-logo/windtre-black.svg",
-        whiteLogo: "/partners-logo/windtre-white.svg",
-        alt: "WindTre Logo"
-    }
-]
+  {
+    name: "Ericsson",
+    blackLogo: "/partners-logo/ericsson-black.svg",
+    whiteLogo: "/partners-logo/ericsson-white.svg",
+    alt: "Ericsson Logo",
+  },
+  {
+    name: "Tele2",
+    blackLogo: "/partners-logo/tele2-black.svg",
+    whiteLogo: "/partners-logo/tele2-white.svg",
+    alt: "Tele2 Logo",
+    imageClassName: "h-[6rem]",
+  },
+  {
+    name: "T-Mobile",
+    blackLogo: "/partners-logo/t-mobile-black.svg",
+    whiteLogo: "/partners-logo/t-mobile-white.svg",
+    alt: "T-Mobile Logo",
+  },
+  {
+    name: "Odido",
+    blackLogo: "/partners-logo/odido-black.svg",
+    whiteLogo: "/partners-logo/odido-white.svg",
+    alt: "Odido Logo",
+  },
+  {
+    name: "WindTre",
+    blackLogo: "/partners-logo/windtre-black.svg",
+    whiteLogo: "/partners-logo/windtre-white.svg",
+    alt: "WindTre Logo",
+    imageClassName: "h-full",
+  },
+  {
+    name: "Proximus",
+    blackLogo: "/partners-logo/proximus-black.svg",
+    whiteLogo: "/partners-logo/proximus-white.svg",
+    alt: "Proximus Logo",
+  },
+];
+
+export const EnterprisePartners = [
+  {
+    name: "Lenovo",
+    blackLogo: "/partners-logo/lenovo-black.svg",
+    whiteLogo: "/partners-logo/lenovo-white.svg",
+    alt: "Lenovo Logo",
+  },
+  {
+    name: "Intel",
+    blackLogo: "/partners-logo/intel-black.svg",
+    whiteLogo: "/partners-logo/intel-white.svg",
+    alt: "Intel Logo",
+    imageClassName: "h-[2.2rem]",
+  },
+  {
+    name: "Epic",
+    blackLogo: "/partners-logo/epic.png",
+    whiteLogo: "/partners-logo/epic.png",
+    alt: "Epic Logo",
+    imageClassName: "h-[3.5rem]",
+    darkImageClassName: "grayscale invert",
+    whiteImageClassName: "grayscale",
+  },
+  {
+    name: "Hungama",
+    blackLogo: "/partners-logo/hungama-black.svg",
+    whiteLogo: "/partners-logo/hungama-white.svg",
+    alt: "Hungama Logo",
+    imageClassName: "h-[2.5rem]",
+  },
+  {
+    name: "Nazara",
+    blackLogo: "/partners-logo/nazara.png",
+    whiteLogo: "/partners-logo/nazara.png",
+    alt: "Nazara Logo",
+    imageClassName: "h-full w-full",
+    darkImageClassName: "invert",
+    whiteImageClassName: "brightness-0 invert",
+  },
+  {
+    name: "MPL",
+    blackLogo: "/partners-logo/mpl.png",
+    whiteLogo: "/partners-logo/mpl.png",
+    alt: "MPL Logo",
+    darkImageClassName: "grayscale h-full w-full",
+    whiteImageClassName: "brightness-0 invert h-full w-full",
+  },
+  {
+    name: "ONDC",
+    blackLogo: "/partners-logo/ondc-black.svg",
+    whiteLogo: "/partners-logo/ondc-white.svg",
+    alt: "ONDC Logo",
+    imageClassName: "h-full",
+  },
+];

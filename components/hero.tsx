@@ -21,7 +21,7 @@ function Hero({}: Props) {
           className={[
             "bg-[linear-gradient(135deg,#FF6B6B_0%,#E84393_33%,#6C5CE7_66%,#4A90E2_100%)]",
             "relative inline-flex items-center gap-2",
-            "px-6 py-2.5 rounded-lg",
+            "px-12 py-5 rounded-3xl",
             "text-sm font-semibold text-white tracking-wide",
             "overflow-hidden no-underline",
             "transition-all duration-300",
@@ -30,15 +30,7 @@ function Hero({}: Props) {
             "group w-fit",
           ].join(" ")}
         >
-          <span
-            aria-hidden="true"
-            className={[
-              "absolute inset-0 pointer-events-none",
-              "bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.18)_50%,transparent_60%)]",
-              "opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-            ].join(" ")}
-          />
-          <span className="relative z-10">Explore Solutions</span>
+          <span className="relative text-lg z-10">Explore Solutions</span>
           <MoveRight />
         </Link>
 

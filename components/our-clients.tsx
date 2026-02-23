@@ -1,46 +1,54 @@
-import { partners } from "@/constant/home";
+import { EnterprisePartners, partners } from "@/constant/home";
 import PartnerCard from "./partner-card";
+import SectionHeader from "./SectionHeader";
+import StatsSection from "./stats-section";
 
-type Props = {};
 
-const OurClients = (props: Props) => {
+const OurClients = () => {
   return (
-    <section className="w-full py-24 px-6">
-      <div className="max-w-5xl mx-auto text-center">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <span className="w-5 h-0.5 bg-(--purple)" />
-          <span className="text-sm font-bold tracking-[0.12rem] text-(--purple) uppercase">
-            Our Clients
-          </span>
-        </div>
-
-        <h2 className="text-[clamp(36px,4vw,56px)] font-semibold leading-[1.15] tracking-[-0.02em]">
-          <span>Trusted by</span>{" "}
-          <span className="gradient-text">
-            Industry Leaders
-          </span>{" "}
-          <span>Worldwide</span>
-        </h2>
-
-        {/* Description */}
-        <p className="mt-4 text-lg md:text-xl leading-relaxed text-gray-600 max-w-3xl mx-auto">
-          From tier-1 telecom operators to global technology giants — the
-          world's most innovative companies trust DigiPlus to deliver.
-        </p>
-      </div>
+    <section className="w-full max-w-360 mx-auto pt-16 lg:pt-24 px-2 lg:px-6">
+      <SectionHeader
+        badge="Our Clients"
+        titleStart="Trusted by"
+        highlight="Industry Leaders"
+        titleEnd="Worldwide"
+        description="From tier-1 telecom operators to global technology giants — the world's most innovative companies trust DigiPlus to deliver."
+      />
       <div className="flex flex-col gap-2 text-center mt-6">
-        <h3 className="text-sm font-bold tracking-[0.12rem] text-gray-400 uppercase">Telecom Partners</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
+        <h3 className="text-sm font-bold tracking-[0.12rem] text-gray-400 uppercase">
+          Telecom Partners
+        </h3>
+        <div className="lg:flex lg:flex-wrap grid grid-cols-2 justify-center items-center gap-2 lg:gap-8 mt-8">
           {partners.map((partner, index) => (
             <PartnerCard
               key={index}
               blackLogo={partner.blackLogo}
               whiteLogo={partner.whiteLogo}
               alt={partner.alt}
+              imageClassName={partner.imageClassName}
             />
           ))}
         </div>
       </div>
+      <div className="flex flex-col gap-2 text-center mt-6 py-6">
+        <h3 className="text-sm font-bold tracking-[0.12rem] text-gray-400 uppercase">
+          Enterprise Partners
+        </h3>
+        <div className="lg:flex lg:flex-wrap grid grid-cols-2 justify-center items-center gap-2 lg:gap-8 mt-8">
+          {EnterprisePartners.map((partner, index) => (
+            <PartnerCard
+              key={index}
+              blackLogo={partner.blackLogo}
+              whiteLogo={partner.whiteLogo}
+              alt={partner.alt}
+              imageClassName={partner.imageClassName}
+              darkImageClassName={partner.darkImageClassName}
+              whiteImageClassName={partner.whiteImageClassName}
+            />
+          ))}
+        </div>
+      </div>
+      <StatsSection/>
     </section>
   );
 };
