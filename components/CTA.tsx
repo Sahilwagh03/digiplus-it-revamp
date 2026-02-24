@@ -1,6 +1,11 @@
 import { MoveRight } from "lucide-react";
+interface CTAProps {
+  title?: string;
+  description?: string;
+  buttonText?: string;
+}
 
-const CTA = () => {
+const CTA = ({title='Ready to Transform Your Operations?',description='Let’s discuss how DigiPlus can accelerate your digital transformation journey.',buttonText='Get Started'}:CTAProps) => {
   return (
     <section className="relative overflow-hidden bg-[#f7f7f5] py-36 px-6 m-6 rounded-3xl">
       
@@ -35,12 +40,11 @@ const CTA = () => {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         <h2 className="text-[clamp(38px,4vw,66px)] font-semibold tracking-[-0.025em] leading-[1.08] text-[#111]">
-          Ready to Transform Your Operations?
+          {title}
         </h2>
 
         <p className="mt-6 text-lg md:text-xl text-black/65 max-w-3xl mx-auto leading-relaxed">
-          Let’s discuss how DigiPlus can accelerate your digital
-          transformation journey.
+          {description}
         </p>
 
         <div className="mt-6 flex justify-center">
@@ -52,7 +56,7 @@ const CTA = () => {
             hover:shadow-[0_25px_80px_rgba(0,0,0,0.18)] cursor-pointer"
           >
             <span className="flex items-center gap-2">
-              Get Started
+              {buttonText}
               <MoveRight />
             </span>
           </button>

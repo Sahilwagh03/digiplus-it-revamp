@@ -7,6 +7,12 @@ type Props = {};
 function Hero({}: Props) {
   return (
     <section className="relative h-screen w-full overflow-hidden cursor-pointer">
+      <HeroSphere
+        sphereSizeFactor={0.5}
+        nodeCount={1200}
+        connectionDistance={70}
+        className="absolute inset-0 z-0"
+      />
       <div className="relative pointer-events-none z-10 flex flex-col text-center items-center justify-center h-full">
         <h1 className="text-[clamp(52px,7vw,96px)] font-normal leading-[1.05] tracking-[-0.03em] text-(--navy)">
           Enterprise
@@ -41,12 +47,6 @@ function Hero({}: Props) {
           <CircleArrowDown className="w-4 h-4 text-(--navy)/70" />
         </div>
       </div>
-      <HeroSphere
-        sphereSizeFactor={0.5}
-        nodeCount={1200}
-        connectionDistance={70}
-        className="absolute inset-0 z-1"
-      />
     </section>
   );
 }

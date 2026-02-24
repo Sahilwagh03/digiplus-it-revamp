@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, JSX } from "react";
+import { useState, useEffect, JSX } from "react";
 import Link from "next/link";
 
 interface NavItem {
@@ -13,10 +13,6 @@ interface NavLinkProps {
   children: React.ReactNode;
 }
 
-interface IconProps {
-  className?: string;
-}
-
 const NAV_LINKS: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Insights", href: "/insights" },
@@ -25,32 +21,24 @@ const NAV_LINKS: NavItem[] = [
   { label: "About Us", href: "/about" },
 ];
 
-/**
- * Brand gradient reused as a Tailwind arbitrary-value class.
- * No inline style needed anywhere — Tailwind generates the rule.
- */
+
 const BRAND_BG =
   "bg-[linear-gradient(135deg,#FF6B6B_0%,#E84393_33%,#6C5CE7_66%,#4A90E2_100%)]";
 
 export default function Navbar(): JSX.Element {
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [hidden, setHidden] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const lastScrollY = useRef<number>(0);
 
-  /* Scroll spy — hide nav on scroll-down, reveal on scroll-up */
+
   useEffect(() => {
     const onScroll = (): void => {
       const y = window.scrollY;
       setScrolled(y > 50);
-      setHidden(y > lastScrollY.current && y > 200);
-      lastScrollY.current = y;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Trap body scroll while mobile menu is open */
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -63,24 +51,19 @@ export default function Navbar(): JSX.Element {
 
   return (
     <>
-      {/* ═══════════════════════════
-          MAIN NAV
-      ═══════════════════════════ */}
       <nav
         aria-label="Main navigation"
         className={[
-          "fixed top-0 left-0 right-0 z-50",
+          "sticky top-0 left-0 right-0 z-1000",
           "h-16 flex items-center",
           "bg-white/92 backdrop-blur-2xl",
           "transition-all duration-500 ease-in-out",
           scrolled
             ? "border-b border-black/6 shadow-[0_1px_12px_rgba(0,0,0,0.04)]"
             : "border-b border-black/4",
-          hidden ? "-translate-y-full" : "translate-y-0",
         ].join(" ")}
       >
         <div className="w-[90%] max-w-360 mx-auto flex items-center justify-between">
-          {/* ── Logo ── */}
           <Link
             href="/"
             aria-label="DigiPlus Home"
@@ -103,7 +86,6 @@ export default function Navbar(): JSX.Element {
             </span>
           </Link>
 
-          {/* ── Desktop Links ── */}
           <ul className="hidden lg:flex items-center gap-9 list-none m-0 p-0">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={label}>
@@ -111,7 +93,6 @@ export default function Navbar(): JSX.Element {
               </li>
             ))}
 
-            {/* Contact CTA */}
             <li>
               <Link
                 href="/contact"
@@ -127,7 +108,6 @@ export default function Navbar(): JSX.Element {
                   "group",
                 ].join(" ")}
               >
-                {/* Shimmer sweep on hover */}
                 <span
                   aria-hidden="true"
                   className={[
@@ -141,7 +121,6 @@ export default function Navbar(): JSX.Element {
             </li>
           </ul>
 
-          {/* ── Hamburger ── */}
           <button
             type="button"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -159,10 +138,6 @@ export default function Navbar(): JSX.Element {
           </button>
         </div>
       </nav>
-
-      {/* ═══════════════════════════
-          MOBILE OVERLAY MENU
-      ═══════════════════════════ */}
       <div
         role="dialog"
         aria-label="Mobile navigation"
@@ -179,7 +154,6 @@ export default function Navbar(): JSX.Element {
             : "opacity-0 invisible pointer-events-none",
         ].join(" ")}
       >
-        {/* Ambient radial glow */}
         <div
           aria-hidden="true"
           className={[
@@ -202,10 +176,9 @@ export default function Navbar(): JSX.Element {
             />
           ))}
 
-          {/* Mobile CTA */}
           <MobileNavItem
             href="/contact"
-            label="—" /* placeholder, overridden below */
+            label="—"
             index={NAV_LINKS.length}
             visible={menuOpen}
             onClick={closeMenu}
@@ -217,11 +190,6 @@ export default function Navbar(): JSX.Element {
   );
 }
 
-/* ═══════════════════════════════════════════
-   SUB-COMPONENTS
-═══════════════════════════════════════════ */
-
-/** Desktop nav link with animated gradient underline */
 function DesktopNavLink({ href, children }: NavLinkProps): JSX.Element {
   return (
     <Link
@@ -247,7 +215,6 @@ function DesktopNavLink({ href, children }: NavLinkProps): JSX.Element {
   );
 }
 
-/** Single hamburger line */
 function HamburgerBar({ extra = "" }: { extra?: string }): JSX.Element {
   return (
     <span
@@ -260,7 +227,6 @@ function HamburgerBar({ extra = "" }: { extra?: string }): JSX.Element {
   );
 }
 
-/** Mobile menu item — stagger-fades in via Tailwind + inline transitionDelay only */
 interface MobileNavItemProps {
   href: string;
   label: string;
