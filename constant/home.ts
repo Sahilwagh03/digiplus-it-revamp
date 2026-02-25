@@ -95,7 +95,6 @@ export const EnterprisePartners = [
   },
 ];
 
-
 export const services = [
   {
     title: "Artificial Intelligence",
@@ -138,12 +137,7 @@ export const services = [
       "Application Governance & Compliance",
     ],
 
-    technologies: [
-      "SAP",
-      "Salesforce",
-      "ServiceNow",
-      "Oracle",
-    ],
+    technologies: ["SAP", "Salesforce", "ServiceNow", "Oracle"],
   },
 
   {
@@ -230,12 +224,7 @@ export const services = [
       "Test Strategy & Governance",
     ],
 
-    technologies: [
-      "Selenium",
-      "Cypress",
-      "Playwright",
-      "JMeter",
-    ],
+    technologies: ["Selenium", "Cypress", "Playwright", "JMeter"],
   },
 
   {
@@ -275,11 +264,120 @@ export const services = [
       "IT Service Management (ITSM)",
     ],
 
-    technologies: [
-      "Jira",
-      "Confluence",
-      "Microsoft Project",
-      "ServiceNow",
-    ],
+    technologies: ["Jira", "Confluence", "Microsoft Project", "ServiceNow"],
   },
 ];
+
+export const insightsData = [
+  {
+    id: 1,
+    type: "usecases",
+    category: "AI & Automation",
+    title: "AI-Driven Service Orchestration Using TM Forum ODA",
+    image:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200",
+  },
+  {
+    id: 2,
+    type: "blog",
+    category: "Cloud",
+    title: "Scaling Cloud-Native Telecom Infrastructure",
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200",
+  },
+  {
+    id: 3,
+    type: "casestudies",
+    category: "5G",
+    title: "Monetizing 5G with Intelligent Network APIs",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200",
+  },
+  {
+    id: 4,
+    type: "usecases",
+    category: "AI & Automation",
+    title: "Predictive Network Maintenance with Machine Learning",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200",
+  },
+  {
+    id: 5,
+    type: "blog",
+    category: "Cloud",
+    title: "Edge Computing in Modern Telecom Architecture",
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200",
+  },
+  {
+    id: 6,
+    type: "casestudies",
+    category: "5G",
+    title: "Private 5G Networks for Enterprise Transformation",
+    image:
+      "https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1200",
+  },
+  {
+    id: 7,
+    type: "usecases",
+    category: "AI & Automation",
+    title: "Intelligent Customer Experience with Conversational AI",
+    image:
+      "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200",
+  },
+  {
+    id: 8,
+    type: "blog",
+    category: "Cloud",
+    title: "Multi-Cloud Strategy for Telecom Operators",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200",
+  },
+  {
+    id: 9,
+    type: "casestudies",
+    category: "5G",
+    title: "Open RAN Deployment for Scalable 5G Infrastructure",
+    image:
+      "https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200",
+  },
+];
+
+
+export const standardsData = [
+  {
+    "badge": "TM FORUM",
+    "title": "TM Forum Open APIs",
+    "description": "Certified implementation partner for TMF Open API suite. We architect API-first telecom platforms using TMF639, TMF641, and 40+ APIs.",
+    "linkText": "View API Portfolio",
+    "linkHref": "#"
+  },
+  {
+    "badge": "ODA",
+    "title": "ODA Framework",
+    "description": "Full-stack ODA component development aligned with Canvas 2.0. Microservices architecture for plug-and-play integration.",
+    "linkText": "Explore ODA Solutions",
+    "linkHref": "#"
+  },
+  {
+    "badge": "SID",
+    "title": "SID Model Expertise",
+    "description": "Deep SID-based data modeling for OSS/BSS. Semantic consistency across Customer, Product, Service, and Resource domains.",
+    "linkText": "Learn About SID",
+    "linkHref": "#"
+  },
+    {
+    "badge": "ISO",
+    "title": "ISO Compliance & Governance",
+    "description": "ISO-aligned security, quality, and operational frameworks ensuring structured governance, risk management, and process excellence.",
+    "linkText": "View ISO Framework",
+    "linkHref": "#"
+  },
+  {
+    "badge": "CLOUD PARTNERS",
+    "title": "AWS & Azure Partners",
+    "description": "Certified cloud partnerships delivering scalable, secure, and high-availability telecom workloads on AWS and Microsoft Azure.",
+    "linkText": "Explore Cloud Capabilities",
+    "linkHref": "#"
+  }
+]

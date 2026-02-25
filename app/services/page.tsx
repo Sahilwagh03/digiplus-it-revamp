@@ -19,7 +19,7 @@ const ServicesPage = () => {
           ))}
         </div>
       </div>
-      <CTA description="Our telecom experts are ready to understand your challenges and  design a solution that delivers measurable results."  buttonText="Schedule Free Consultation"/>
+      <CTA description="Our telecom experts are ready to understand your challenges and  design a solution that delivers measurable results."  buttonText="Schedule Free Consultation" isDialog/>
     </section>
   );
 };

@@ -14,7 +14,7 @@ const OurClients = () => {
         titleEnd="Worldwide"
         description="From tier-1 telecom operators to global technology giants — the world's most innovative companies trust DigiPlus to deliver."
       />
-      <div className="flex flex-col gap-2 text-center mt-6">
+      <div className="flex flex-col gap-2 text-center px-2 lg:px-0 mt-6">
         <h3 className="text-sm font-bold tracking-[0.12rem] text-gray-400 uppercase">
           Telecom Partners
         </h3>
@@ -30,7 +30,7 @@ const OurClients = () => {
           ))}
         </div>
       </div>
-      <div className="flex flex-col gap-2 text-center mt-6 py-6">
+      <div className="flex flex-col gap-2 text-center px-2 lg:px-0 mt-6 py-6">
         <h3 className="text-sm font-bold tracking-[0.12rem] text-gray-400 uppercase">
           Enterprise Partners
         </h3>

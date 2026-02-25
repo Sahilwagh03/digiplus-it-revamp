@@ -5,7 +5,7 @@ import { TextAnimate } from "./ui/text-animate";
 
 interface SectionHeaderProps {
   badge?: string;
-  titleStart: string;
+  titleStart?: string;
   highlight?: string;
   titleEnd?: string;
   description?: string;
@@ -27,7 +27,7 @@ const SectionHeader = ({
       className={clsx(
         "max-w-5xl",
         centered ? "text-center mx-auto" : "text-left",
-        className
+        className,
       )}
     >
       {/* Badge */}
@@ -35,7 +35,7 @@ const SectionHeader = ({
         <div
           className={clsx(
             "flex items-center gap-2 mb-4",
-            centered ? "justify-center" : "justify-start"
+            centered ? "justify-center" : "justify-start",
           )}
         >
           <span className="w-5 h-0.5 bg-(--purple)" />
@@ -52,9 +52,11 @@ const SectionHeader = ({
 
       {/* Heading */}
       <h2 className="text-[clamp(36px,4vw,56px)] font-semibold leading-[1.15] tracking-[-0.02em]">
-        <TextAnimate animation="blurIn" as="span" delay={0.1} once={true}>
-          {titleStart}
-        </TextAnimate>
+        { titleStart &&
+          <TextAnimate animation="blurIn" as="span" delay={0.1} once={true}>
+            {titleStart}
+          </TextAnimate>
+        }
 
         {highlight && (
           <>
@@ -90,7 +92,7 @@ const SectionHeader = ({
           once={true}
           className={cn(
             "mt-4 text-lg md:text-xl leading-relaxed text-gray-600 max-w-3xl",
-            centered ? "mx-auto" : ""
+            centered ? "mx-auto" : "",
           )}
         >
           {description}

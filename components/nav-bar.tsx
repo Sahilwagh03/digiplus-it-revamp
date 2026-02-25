@@ -2,6 +2,10 @@
 
 import { useState, useEffect, JSX } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import ContactDialog from "./ContactDialog";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface NavItem {
   label: string;
@@ -11,30 +15,28 @@ interface NavItem {
 interface NavLinkProps {
   href: string;
   children: React.ReactNode;
+  isActive?: boolean;
 }
 
 const NAV_LINKS: NavItem[] = [
+  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
+  { label: "Expertise", href: "/expertise" },
   { label: "Insights", href: "/insights" },
-  { label: "Partners", href: "/partners" },
   { label: "Careers", href: "/careers" },
   { label: "About Us", href: "/about" },
 ];
-
 
 const BRAND_BG =
   "bg-[linear-gradient(135deg,#FF6B6B_0%,#E84393_33%,#6C5CE7_66%,#4A90E2_100%)]";
 
 export default function Navbar(): JSX.Element {
-  const [scrolled, setScrolled] = useState<boolean>(false);
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = (): void => {
-      const y = window.scrollY;
-      setScrolled(y > 50);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -46,125 +48,94 @@ export default function Navbar(): JSX.Element {
     };
   }, [menuOpen]);
 
-  const toggleMenu = (): void => setMenuOpen((p) => !p);
-  const closeMenu = (): void => setMenuOpen(false);
+  const isActiveRoute = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <>
+      {/* ================= NAVBAR ================= */}
       <nav
-        aria-label="Main navigation"
-        className={[
-          "sticky top-0 left-0 right-0 z-1000",
-          "h-16 flex items-center",
-          "bg-white/92 backdrop-blur-2xl",
-          "transition-all duration-500 ease-in-out",
-          scrolled
-            ? "border-b border-black/6 shadow-[0_1px_12px_rgba(0,0,0,0.04)]"
-            : "border-b border-black/4",
-        ].join(" ")}
+        className={cn(
+          "sticky top-0 left-0 right-0 z-50 h-16 flex items-center",
+          "bg-white/90 backdrop-blur-xl transition-all duration-500",
+          scrolled ? "border-b shadow-sm" : "border-b border-black/5",
+        )}
       >
         <div className="w-[90%] max-w-360 mx-auto flex items-center justify-between">
           <Link
             href="/"
             aria-label="DigiPlus Home"
-            className="flex items-center gap-2.5 no-underline group"
+            className="flex items-center"
           >
-            <span
-              aria-hidden="true"
-              className={[
-                BRAND_BG,
-                "size-8.5 rounded-[9px]",
-                "flex items-center justify-center",
-                "text-white font-bold text-sm shrink-0",
-                "transition-transform duration-300 group-hover:scale-110",
-              ].join(" ")}
-            >
-              D+
-            </span>
-            <span className="text-[22px] font-bold tracking-tight text-[#0A2540]">
-              DigiPlus
-            </span>
+            <Image
+              src="/logo.png"
+              alt="DigiPlus IT Logo"
+              width={160}
+              height={40}
+              priority
+              className="h-8 w-auto md:h-9 lg:h-10 object-contain"
+            />
           </Link>
 
-          <ul className="hidden lg:flex items-center gap-9 list-none m-0 p-0">
+          {/* Desktop Nav */}
+          <ul className="hidden lg:flex items-center gap-9">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={label}>
-                <DesktopNavLink href={href}>{label}</DesktopNavLink>
+                <DesktopNavLink href={href} isActive={isActiveRoute(href)}>
+                  {label}
+                </DesktopNavLink>
               </li>
             ))}
 
             <li>
-              <Link
-                href="/contact"
-                className={[
-                  BRAND_BG,
-                  "relative inline-flex items-center gap-2",
-                  "px-6 py-2.5 rounded-xl",
-                  "text-sm font-semibold text-white tracking-wide",
-                  "overflow-hidden no-underline",
-                  "transition-all duration-300",
-                  "hover:-translate-y-0.5",
-                  "hover:shadow-[0_8px_24px_rgba(108,92,231,0.4)]",
-                  "group",
-                ].join(" ")}
-              >
-                <span
-                  aria-hidden="true"
-                  className={[
-                    "absolute inset-0 pointer-events-none",
-                    "bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.18)_50%,transparent_60%)]",
-                    "opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-                  ].join(" ")}
-                />
-                <span className="relative z-10">Contact</span>
-              </Link>
+              <ContactDialog>
+                <button
+                  className={cn(
+                    BRAND_BG,
+                    "relative inline-flex items-center",
+                    "px-6 py-2.5 rounded-xl",
+                    "text-sm font-semibold text-white",
+                    "transition-all duration-300",
+                    "hover:-translate-y-0.5",
+                    "hover:shadow-lg",
+                  )}
+                >
+                  Contact
+                </button>
+              </ContactDialog>
             </li>
           </ul>
 
+          {/* Mobile Hamburger */}
           <button
-            type="button"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            onClick={toggleMenu}
-            className="lg:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer z-50 relative"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+            className="lg:hidden flex flex-col gap-1.5 p-2"
           >
             <HamburgerBar
-              extra={menuOpen ? "rotate-45 translate-y-[8.5px]" : ""}
+              extra={menuOpen ? "rotate-45 translate-y-[8px]" : ""}
             />
             <HamburgerBar extra={menuOpen ? "opacity-0 scale-x-0" : ""} />
             <HamburgerBar
-              extra={menuOpen ? "-rotate-45 -translate-y-[8.5px]" : ""}
+              extra={menuOpen ? "-rotate-45 -translate-y-[8px]" : ""}
             />
           </button>
         </div>
       </nav>
+
+      {/* ================= MOBILE MENU ================= */}
       <div
-        role="dialog"
-        aria-label="Mobile navigation"
-        aria-modal="true"
-        aria-hidden={!menuOpen}
-        className={[
-          "fixed inset-0 z-40",
+        className={cn(
+          "fixed inset-0 z-40 lg:hidden",
           "flex flex-col items-center justify-center",
-          /* Dark navy + blur — no inline style */
-          "bg-[rgba(10,37,64,0.97)] backdrop-blur-[30px]",
-          "transition-all duration-400",
+          "bg-white/80 backdrop-blur-2xl",
+          "transition-all duration-300 ease-out",
           menuOpen
             ? "opacity-100 visible"
             : "opacity-0 invisible pointer-events-none",
-        ].join(" ")}
+        )}
       >
-        <div
-          aria-hidden="true"
-          className={[
-            "absolute size-125 rounded-full pointer-events-none",
-            "bg-[radial-gradient(circle,#6C5CE7_0%,#E84393_50%,transparent_70%)]",
-            "opacity-20 blur-[60px]",
-            "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-          ].join(" ")}
-        />
-
-        <ul className="relative z-10 list-none text-center m-0 p-0 space-y-2">
+        <ul className="text-center space-y-4">
           {NAV_LINKS.map(({ label, href }, i) => (
             <MobileNavItem
               key={label}
@@ -172,60 +143,81 @@ export default function Navbar(): JSX.Element {
               label={label}
               index={i}
               visible={menuOpen}
-              onClick={closeMenu}
+              onClick={() => setMenuOpen(false)}
+              isActive={isActiveRoute(href)}
             />
           ))}
 
-          <MobileNavItem
-            href="/contact"
-            label="—"
-            index={NAV_LINKS.length}
-            visible={menuOpen}
-            onClick={closeMenu}
-            isCta
-          />
+          {/* CTA */}
+          <li
+            className={cn(
+              "pt-6 transition-all duration-300 ease-out",
+              menuOpen
+                ? "opacity-100 translate-y-0 delay-500"
+                : "opacity-0 translate-y-4",
+            )}
+          >
+            <ContactDialog>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className={cn(
+                  BRAND_BG,
+                  "px-10 py-3 rounded-xl",
+                  "text-white font-semibold",
+                  "transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg",
+                )}
+              >
+                Contact
+              </button>
+            </ContactDialog>
+          </li>
         </ul>
       </div>
     </>
   );
 }
 
-function DesktopNavLink({ href, children }: NavLinkProps): JSX.Element {
+/* ================= Desktop Nav Link ================= */
+
+function DesktopNavLink({
+  href,
+  children,
+  isActive = false,
+}: NavLinkProps): JSX.Element {
   return (
     <Link
       href={href}
-      className={[
-        "relative py-1 no-underline group",
-        "text-sm font-medium tracking-wide",
-        "text-[#374151] hover:text-[#0A2540]",
-        "transition-colors duration-200",
-      ].join(" ")}
+      className={cn(
+        "relative py-1 text-sm font-medium transition-colors duration-200",
+        isActive ? "text-[#0A2540]" : "text-gray-600 hover:text-[#0A2540]",
+      )}
     >
       {children}
       <span
-        aria-hidden="true"
-        className={[
+        className={cn(
           BRAND_BG,
-          "absolute -bottom-1.5 left-0",
-          "h-0.5 w-0 group-hover:w-full",
-          "rounded-full transition-all duration-300 ease-out",
-        ].join(" ")}
+          "absolute -bottom-1 left-0 h-0.5 rounded-full transition-all duration-300",
+          isActive ? "w-full" : "w-0 group-hover:w-full",
+        )}
       />
     </Link>
   );
 }
 
+/* ================= Hamburger Bar ================= */
+
 function HamburgerBar({ extra = "" }: { extra?: string }): JSX.Element {
   return (
     <span
-      className={[
-        "w-6 h-0.5 bg-[#0A2540] rounded-sm block",
-        "transition-all duration-300 origin-center",
+      className={cn(
+        "w-6 h-0.5 bg-[#0A2540] rounded transition-all duration-300",
         extra,
-      ].join(" ")}
+      )}
     />
   );
 }
+
+/* ================= Mobile Nav Item ================= */
 
 interface MobileNavItemProps {
   href: string;
@@ -233,7 +225,7 @@ interface MobileNavItemProps {
   index: number;
   visible: boolean;
   onClick: () => void;
-  isCta?: boolean;
+  isActive?: boolean;
 }
 
 function MobileNavItem({
@@ -242,57 +234,27 @@ function MobileNavItem({
   index,
   visible,
   onClick,
-  isCta = false,
+  isActive = false,
 }: MobileNavItemProps): JSX.Element {
-  const delay = `${index * 60 + 80}ms`;
-
-  if (isCta) {
-    return (
-      <li
-        className="pt-6 transition-all duration-400"
-        style={{
-          opacity: visible ? 1 : 0,
-          transitionDelay: delay,
-          transform: visible ? "translateY(0)" : "translateY(20px)",
-        }}
-      >
-        <Link
-          href={href}
-          onClick={onClick}
-          className={[
-            BRAND_BG,
-            "inline-flex items-center gap-2",
-            "px-10 py-4 rounded-2xl",
-            "text-lg font-bold text-white no-underline",
-            "transition-all duration-300",
-            "hover:-translate-y-0.5",
-            "hover:shadow-[0_12px_40px_rgba(108,92,231,0.5)]",
-          ].join(" ")}
-        >
-          Contact
-        </Link>
-      </li>
-    );
-  }
+  const delayClass = `delay-[${index * 75}ms]`;
 
   return (
     <li
-      className="transition-all duration-400"
-      style={{
-        opacity: visible ? 1 : 0,
-        transitionDelay: delay,
-        transform: visible ? "translateY(0)" : "translateY(20px)",
-      }}
+      className={cn(
+        "transition-all duration-300 ease-out",
+        delayClass,
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4",
+      )}
     >
       <Link
         href={href}
         onClick={onClick}
-        className={[
-          "block text-4xl font-semibold tracking-tight no-underline",
-          "text-white/90 hover:text-white",
-          "py-3 px-8 rounded-xl",
-          "transition-all duration-200 hover:bg-white/5",
-        ].join(" ")}
+        className={cn(
+          "block text-2xl font-semibold py-2 px-6 rounded-lg transition-colors duration-200",
+          isActive
+            ? "text-[#0A2540] bg-black/5"
+            : "text-gray-600 hover:text-[#0A2540]",
+        )}
       >
         {label}
       </Link>

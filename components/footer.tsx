@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Mail, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, Linkedin, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-neutral-600 ">
+    <footer className="bg-white text-neutral-600">
       <div className="max-w-340 mx-auto px-6 py-16">
 
         {/* Top Section */}
@@ -25,9 +25,21 @@ export default function Footer() {
               Solutions
             </h3>
             <ul className="space-y-4 text-sm">
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">Services</Link></li>
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">AI Products</Link></li>
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">Expertise</Link></li>
+              <li>
+                <Link href="/services" className="hover:text-neutral-900 transition-colors">
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/services#ai-products" className="hover:text-neutral-900 transition-colors">
+                  AI Products
+                </Link>
+              </li>
+              <li>
+                <Link href="/expertise" className="hover:text-neutral-900 transition-colors">
+                  Expertise
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -37,10 +49,21 @@ export default function Footer() {
               Company
             </h3>
             <ul className="space-y-4 text-sm">
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">About Us</Link></li>
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">Careers</Link></li>
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">Partners</Link></li>
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">Contact</Link></li>
+              <li>
+                <Link href="/about" className="hover:text-neutral-900 transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/careers" className="hover:text-neutral-900 transition-colors">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-neutral-900 transition-colors">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -50,9 +73,16 @@ export default function Footer() {
               Resources
             </h3>
             <ul className="space-y-4 text-sm">
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">Case Studies</Link></li>
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">Insights</Link></li>
-              <li><Link href="#" className="hover:text-neutral-900 transition-colors">White Papers</Link></li>
+              <li>
+                <Link href="/insights" className="hover:text-neutral-900 transition-colors">
+                  Insights
+                </Link>
+              </li>
+              <li>
+                <Link href="/insights" className="hover:text-neutral-900 transition-colors">
+                  Case Studies
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -63,16 +93,26 @@ export default function Footer() {
             Connect
           </h3>
           <div className="flex flex-wrap items-center gap-6 text-sm">
-            <Link href="#" className="flex items-center gap-2 hover:text-neutral-900 transition-colors">
+            <Link
+              href="https://linkedin.com/company/digiplus-it"
+              target="_blank"
+              className="flex items-center gap-2 hover:text-neutral-900 transition-colors"
+            >
               <Linkedin size={16} /> LinkedIn
             </Link>
-            <Link href="#" className="flex items-center gap-2 hover:text-neutral-900 transition-colors">
+
+            <Link
+              href="https://twitter.com/digiplus_it"
+              target="_blank"
+              className="flex items-center gap-2 hover:text-neutral-900 transition-colors"
+            >
               <Twitter size={16} /> Twitter
             </Link>
-            <Link href="#" className="flex items-center gap-2 hover:text-neutral-900 transition-colors">
-              <Github size={16} /> GitHub
-            </Link>
-            <Link href="#" className="flex items-center gap-2 hover:text-neutral-900 transition-colors">
+
+            <Link
+              href="mailto:salesman@digiplusit.com"
+              className="flex items-center gap-2 hover:text-neutral-900 transition-colors"
+            >
               <Mail size={16} /> Email
             </Link>
           </div>
@@ -85,13 +125,13 @@ export default function Footer() {
           </p>
 
           <div className="flex gap-6">
-            <Link href="#" className="hover:text-neutral-900 transition-colors">
+            <Link href="/privacy-policy" className="hover:text-neutral-900 transition-colors">
               Privacy Policy
             </Link>
-            <Link href="#" className="hover:text-neutral-900 transition-colors">
+            <Link href="/terms-of-service" className="hover:text-neutral-900 transition-colors">
               Terms of Service
             </Link>
-            <Link href="#" className="hover:text-neutral-900 transition-colors">
+            <Link href="/security" className="hover:text-neutral-900 transition-colors">
               Security
             </Link>
           </div>

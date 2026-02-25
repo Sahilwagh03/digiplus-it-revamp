@@ -6,11 +6,13 @@ type Props = {};
 
 function Hero({}: Props) {
   return (
-    <section className="relative h-screen w-full overflow-hidden cursor-pointer">
+    <section className="relative h-[92svh] lg:h-[90svh] w-full overflow-hidden cursor-pointer">
       <HeroSphere
-        sphereSizeFactor={0.5}
+        sphereSizeFactor={0.6}
         nodeCount={1200}
-        connectionDistance={70}
+        connectionDistance={50}
+        mobileNodeCount={500}
+        mobileConnectionDistance={100}
         className="absolute inset-0 z-0"
       />
       <div className="relative pointer-events-none z-10 flex flex-col text-center items-center justify-center h-full">
@@ -23,17 +25,17 @@ function Hero({}: Props) {
         </h1>
 
         <Link
-          href="/contact"
+          href="/services"
           className={[
             "bg-[linear-gradient(135deg,#FF6B6B_0%,#E84393_33%,#6C5CE7_66%,#4A90E2_100%)]",
             "relative inline-flex items-center gap-2",
-            "px-12 py-5 rounded-3xl",
-            "text-sm font-semibold text-white tracking-wide",
+            "px-8 py-3 rounded-xl",
+            "font-semibold text-white tracking-wide",
             "overflow-hidden no-underline",
             "transition-all duration-300",
             "hover:-translate-y-0.5",
             "hover:shadow-[0_8px_24px_rgba(108,92,231,0.4)]",
-            "group w-fit",
+            "group w-fit pointer-events-auto",
           ].join(" ")}
         >
           <span className="relative text-lg z-10">Explore Solutions</span>

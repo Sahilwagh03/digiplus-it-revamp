@@ -7,7 +7,6 @@ const AiProductSection = () => {
       <div className="flex flex-col gap-16">
 
         <SectionHeader
-          badge="Vision"
           titleStart="Accelerating Telecom's Evolution with"
           highlight="AI-Driven Innovation"
           description="Enterprise-grade digital transformation partner trusted by global telecom leaders. We bridge legacy systems to autonomous futures."

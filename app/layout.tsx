@@ -1,9 +1,32 @@
-
 import { Space_Grotesk } from "next/font/google";
-import "./globals.css";
+import './globals.css';
 import NavBar from "@/components/nav-bar";
 import Lenis from "@/components/lenis";
 import Footer from "@/components/footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DigiPlus IT – AI-Driven Digital Solutions",
+  description:
+    "Transforming enterprises with AI-driven digital solutions, scalable technology, and modern web experiences.",
+  keywords: [
+    "digital transformation",
+    "AI solutions",
+    "enterprise software",
+    "Next.js development",
+    "web development",
+    "digital innovation",
+  ],
+  openGraph: {
+    title: "DigiPlus IT – AI-Driven Digital Solutions",
+    description:
+      "Transforming enterprises with AI-driven digital solutions and scalable technology innovation.",
+    url: "https://digiplusit.com",
+    siteName: "DigiPlus IT",
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -20,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.variable} font-sans antialiased`}>
-          <NavBar />
+        <NavBar />
         <Lenis>
           {children}
         </Lenis>

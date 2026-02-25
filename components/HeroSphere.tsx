@@ -7,8 +7,8 @@ export interface HeroSphereProps {
   mobileNodeCount?: number;
   connectionDistance?: number;
   mobileConnectionDistance?: number;
-  rotationDuration?: number; // seconds for full rotation
-  sphereSizeFactor?: number; // % of min(width,height)
+  rotationDuration?: number;
+  sphereSizeFactor?: number;
   deformStrength?: number;
   clusterStrength?: number;
   recoverySpeed?: number;
@@ -34,17 +34,14 @@ const HeroSphere: React.FC<HeroSphereProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     const isMobile = window.innerWidth < 768;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    let W = 0,
-      H = 0,
-      centerX = 0,
-      centerY = 0,
-      sphereRadius = 0;
+    let W = 0, H = 0, centerX = 0, centerY = 0, sphereRadius = 0;
+    let rafId = 0;
 
     const resize = () => {
       W = canvas.clientWidth * dpr;
@@ -57,225 +54,211 @@ const HeroSphere: React.FC<HeroSphereProps> = ({
     };
 
     resize();
-    window.addEventListener("resize", resize);
 
-    const NODE_COUNT = isMobile ? mobileNodeCount : nodeCount;
-    const CONNECTION_DIST = isMobile
-      ? mobileConnectionDistance
-      : connectionDistance;
+    // Debounced resize
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 120);
+    };
+    window.addEventListener("resize", onResize);
 
+    const N = isMobile ? mobileNodeCount : nodeCount;
+    const CONN_DIST = isMobile ? mobileConnectionDistance : connectionDistance;
+    const CONN_DIST_SQ = CONN_DIST * CONN_DIST;
     const FOV = 500;
+    const ROT_SPEED = (Math.PI * 2) / (rotationDuration * 60);
 
-    const nodes: {
-      bx: number;
-      by: number;
-      bz: number;
-      x: number;
-      y: number;
-      z: number;
-      dx: number;
-      dy: number;
-      dz: number;
+    type Node = {
+      bx: number; by: number; bz: number;
+      x: number; y: number; z: number;
+      dx: number; dy: number; dz: number;
       size: number;
-    }[] = [];
+    };
 
-    // Create sphere nodes
-    for (let i = 0; i < NODE_COUNT; i++) {
+    // ── Nodes — original values, untouched ───────────────────────────────────
+    const nodes: Node[] = [];
+    for (let i = 0; i < N; i++) {
       const phi = Math.random() * Math.PI * 2;
       const theta = Math.acos(2 * Math.random() - 1);
       const r = sphereRadius * (0.7 + Math.random() * 0.3);
-
       nodes.push({
         bx: r * Math.sin(theta) * Math.cos(phi),
         by: r * Math.sin(theta) * Math.sin(phi),
         bz: r * Math.cos(theta),
-        x: 0,
-        y: 0,
-        z: 0,
-        dx: 0,
-        dy: 0,
-        dz: 0,
+        x: 0, y: 0, z: 0,
+        dx: 0, dy: 0, dz: 0,
         size: 0.8 + Math.random() * 1.5,
       });
     }
 
-    let rotY = 0;
-    const ROT_SPEED = (Math.PI * 2) / (rotationDuration * 60);
-
     const mouse = { x: 0, y: 0, active: false };
-    let prevMouseX = 0;
-    let prevMouseY = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouse.x = (e.clientX - rect.left) * dpr;
       mouse.y = (e.clientY - rect.top) * dpr;
       mouse.active = true;
-      prevMouseX = mouse.x;
-      prevMouseY = mouse.y;
     };
-
-    const handleMouseLeave = () => {
-      mouse.active = false;
-    };
+    const handleMouseLeave = () => { mouse.active = false; };
 
     if (!isMobile) {
       canvas.addEventListener("mousemove", handleMouseMove);
       canvas.addEventListener("mouseleave", handleMouseLeave);
     }
 
-    function rotateY(x: number, y: number, z: number, angle: number) {
-      const c = Math.cos(angle);
-      const s = Math.sin(angle);
-      return {
-        x: x * c + z * s,
-        y,
-        z: -x * s + z * c,
-      };
-    }
-
-    function project(x: number, y: number, z: number) {
-      const scale = FOV / (FOV + z);
-      return {
-        px: x * scale + centerX,
-        py: y * scale + centerY,
-        scale,
-      };
-    }
-
-    // Original color system
-    function getNodeColor(zNorm: number, alpha: number) {
+    // ── Color — original, untouched ──────────────────────────────────────────
+    function getNodeColor(zNorm: number, alpha: number): string {
       const t = (zNorm + 1) / 2;
       let r: number, g: number, b: number;
-
       if (t < 0.33) {
         const s = t / 0.33;
-        r = 74 + (108 - 74) * s;
-        g = 144 + (92 - 144) * s;
-        b = 226 + (231 - 226) * s;
+        r = 74 + (108 - 74) * s; g = 144 + (92 - 144) * s; b = 226 + (231 - 226) * s;
       } else if (t < 0.66) {
         const s = (t - 0.33) / 0.33;
-        r = 108 + (232 - 108) * s;
-        g = 92 + (67 - 92) * s;
-        b = 231 + (147 - 231) * s;
+        r = 108 + (232 - 108) * s; g = 92 + (67 - 92) * s; b = 231 + (147 - 231) * s;
       } else {
         const s = (t - 0.66) / 0.34;
-        r = 232 + (255 - 232) * s;
-        g = 67 + (107 - 67) * s;
-        b = 147 + (107 - 147) * s;
+        r = 232 + (255 - 232) * s; g = 67 + (107 - 67) * s; b = 147 + (107 - 147) * s;
       }
-
-      return `rgba(${r | 0},${g | 0},${b | 0},${alpha})`;
+      return `rgba(${r | 0},${g | 0},${b | 0},${alpha.toFixed(3)})`;
     }
+
+    // ── Pre-allocated projected array — no per-frame allocations ─────────────
+    type Projected = { px: number; py: number; scale: number; z: number; zNorm: number };
+    const projected: Projected[] = Array.from({ length: N }, () => ({
+      px: 0, py: 0, scale: 1, z: 0, zNorm: 0,
+    }));
+
+    /**
+     * Spatial grid — O(n) connection checks instead of O(n²).
+     *
+     * KEY FIX: large GRID_OFFSET ensures projected coords (which can be
+     * negative for a large sphere like sphereSizeFactor=0.7) always map
+     * to positive cell indices, preventing hash key collisions that would
+     * cause connections to be silently missed.
+     */
+    const GRID_OFFSET = 32768; // safely larger than any projected coordinate
+
+    const buildGrid = (pts: Projected[], cellSize: number) => {
+      const grid = new Map<number, number[]>();
+      // cellW must cover the full shifted coordinate range
+      const cellW = Math.ceil((W + GRID_OFFSET * 2) / cellSize) + 2;
+
+      const key = (cx: number, cy: number) => cx + cy * cellW;
+
+      for (let i = 0; i < pts.length; i++) {
+        const cx = Math.floor((pts[i].px + GRID_OFFSET) / cellSize);
+        const cy = Math.floor((pts[i].py + GRID_OFFSET) / cellSize);
+        const k = key(cx, cy);
+        if (!grid.has(k)) grid.set(k, []);
+        grid.get(k)!.push(i);
+      }
+      return { grid, key };
+    };
+
+    let rotY = 0;
 
     const animate = () => {
       ctx.clearRect(0, 0, W, H);
 
+      // cos/sin computed once per frame, not once per node
+      const cosY = Math.cos(rotY);
+      const sinY = Math.sin(rotY);
       rotY += ROT_SPEED;
 
-      const projected: {
-        px: number;
-        py: number;
-        scale: number;
-        z: number;
-        zNorm: number;
-      }[] = [];
-
-      for (let i = 0; i < NODE_COUNT; i++) {
+      for (let i = 0; i < N; i++) {
         const n = nodes[i];
 
-        const rotated = rotateY(n.bx, n.by, n.bz, rotY);
+        // Inline rotateY — eliminates one {x,y,z} object allocation per node
+        const rx = n.bx * cosY + n.bz * sinY;
+        const ry = n.by;
+        const rz = -n.bx * sinY + n.bz * cosY;
 
-        const tx = rotated.x;
-        const ty = rotated.y;
-        const tz = rotated.z;
+        const tpScale = FOV / (FOV + rz);
+        const tpx = rx * tpScale + centerX;
+        const tpy = ry * tpScale + centerY;
 
-        const tp = project(tx, ty, tz);
-
-        // Deformation
         if (mouse.active && !isMobile) {
-          const dx = tp.px - mouse.x;
-          const dy = tp.py - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const ddx = tpx - mouse.x;
+          const ddy = tpy - mouse.y;
+          const dist = Math.sqrt(ddx * ddx + ddy * ddy);
           const DEFORM_RADIUS = sphereRadius * 1.2;
 
           if (dist < DEFORM_RADIUS) {
             const influence = Math.pow(1 - dist / DEFORM_RADIUS, 2);
-            const attractX =
-              (mouse.x - tp.px) * clusterStrength * influence;
-            const attractY =
-              (mouse.y - tp.py) * clusterStrength * influence;
-
-            n.dx += attractX * 0.1;
-            n.dy += attractY * 0.1;
+            n.dx += (mouse.x - tpx) * clusterStrength * influence * 0.1;
+            n.dy += (mouse.y - tpy) * clusterStrength * influence * 0.1;
             n.dz += -influence * deformStrength * 0.05;
           }
         }
 
+        // Original two-pass damping + recovery, preserved exactly
         n.dx *= damping;
         n.dy *= damping;
         n.dz *= damping;
-
         n.dx += -n.dx * recoverySpeed;
         n.dy += -n.dy * recoverySpeed;
         n.dz += -n.dz * recoverySpeed;
 
-        n.x = tx + n.dx;
-        n.y = ty + n.dy;
-        n.z = tz + n.dz;
+        n.x = rx + n.dx;
+        n.y = ry + n.dy;
+        n.z = rz + n.dz;
 
-        const p = project(n.x, n.y, n.z);
-        const zNorm = n.z / (sphereRadius * 1.3);
-
-        projected.push({
-          px: p.px,
-          py: p.py,
-          scale: p.scale,
-          z: n.z,
-          zNorm: Math.max(-1, Math.min(1, zNorm)),
-        });
+        const scale = FOV / (FOV + n.z);
+        projected[i].px    = n.x * scale + centerX;
+        projected[i].py    = n.y * scale + centerY;
+        projected[i].scale = scale;
+        projected[i].z     = n.z;
+        projected[i].zNorm = Math.max(-1, Math.min(1, n.z / (sphereRadius * 1.3)));
       }
 
-      // Draw connections
-      const maxDist = CONNECTION_DIST * CONNECTION_DIST;
+      // ── Draw connections via spatial grid ────────────────────────────────────
+      const { grid, key } = buildGrid(projected, CONN_DIST);
 
-      for (let i = 0; i < projected.length; i++) {
-        for (let j = i + 1; j < projected.length; j++) {
-          const dx = projected[i].px - projected[j].px;
-          const dy = projected[i].py - projected[j].py;
-          const dist = dx * dx + dy * dy;
+      for (let i = 0; i < N; i++) {
+        const pi = projected[i];
+        const cx = Math.floor((pi.px + GRID_OFFSET) / CONN_DIST);
+        const cy = Math.floor((pi.py + GRID_OFFSET) / CONN_DIST);
 
-          if (dist < maxDist) {
-            const alpha =
-              (1 - dist / maxDist) *
-              0.2 *
-              Math.min(projected[i].scale, projected[j].scale);
+        for (let ox = -1; ox <= 1; ox++) {
+          for (let oy = -1; oy <= 1; oy++) {
+            const neighbors = grid.get(key(cx + ox, cy + oy));
+            if (!neighbors) continue;
 
-            ctx.strokeStyle = getNodeColor(
-              (projected[i].zNorm + projected[j].zNorm) / 2,
-              alpha
-            );
+            for (const j of neighbors) {
+              if (j <= i) continue; // each pair drawn once only
 
-            ctx.lineWidth = 0.6 * dpr;
-            ctx.beginPath();
-            ctx.moveTo(projected[i].px, projected[i].py);
-            ctx.lineTo(projected[j].px, projected[j].py);
-            ctx.stroke();
+              const pj = projected[j];
+              const dx = pi.px - pj.px;
+              const dy = pi.py - pj.py;
+              const dist2 = dx * dx + dy * dy;
+
+              if (dist2 < CONN_DIST_SQ) {
+                // original alpha formula, untouched
+                const alpha =
+                  (1 - dist2 / CONN_DIST_SQ) * 0.2 * Math.min(pi.scale, pj.scale);
+
+                ctx.strokeStyle = getNodeColor((pi.zNorm + pj.zNorm) / 2, alpha);
+                ctx.lineWidth = 0.6 * dpr; // original value
+                ctx.beginPath();
+                ctx.moveTo(pi.px, pi.py);
+                ctx.lineTo(pj.px, pj.py);
+                ctx.stroke();
+              }
+            }
           }
         }
       }
 
-      // Draw nodes
-      for (const p of projected) {
+      // ── Draw nodes — original radius formula, untouched ─────────────────────
+      for (let i = 0; i < N; i++) {
+        const p = projected[i];
         const alpha =
           0.15 +
-          0.75 *
-            Math.max(
-              0,
-              Math.min(1, (p.z + sphereRadius) / (sphereRadius * 2))
-            );
+          0.75 * Math.max(0, Math.min(1, (p.z + sphereRadius) / (sphereRadius * 2)));
 
-        const r = Math.max(0.5, 1.2 * p.scale * dpr);
+        const r = Math.max(0.5, 1.2 * p.scale * dpr); // original value
 
         ctx.fillStyle = getNodeColor(p.zNorm, alpha);
         ctx.beginPath();
@@ -283,35 +266,25 @@ const HeroSphere: React.FC<HeroSphereProps> = ({
         ctx.fill();
       }
 
-      requestAnimationFrame(animate);
+      rafId = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
-      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(rafId); // critical: was missing in original
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", onResize);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, [
-    nodeCount,
-    mobileNodeCount,
-    connectionDistance,
-    mobileConnectionDistance,
-    rotationDuration,
-    sphereSizeFactor,
-    deformStrength,
-    clusterStrength,
-    recoverySpeed,
-    damping,
+    nodeCount, mobileNodeCount, connectionDistance, mobileConnectionDistance,
+    rotationDuration, sphereSizeFactor, deformStrength, clusterStrength,
+    recoverySpeed, damping,
   ]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className={`w-full h-full block ${className}`}
-    />
-  );
+  return <canvas ref={canvasRef} className={`w-full h-full block ${className}`} />;
 };
 
 export default HeroSphere;
