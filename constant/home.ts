@@ -381,3 +381,48 @@ export const standardsData = [
     "linkHref": "#"
   }
 ]
+
+export const aiProducts = [
+  {
+    "id": "dashboard",
+    "badge": "Intelligence Dashboard",
+    "title": "Unified Data Dashboard for Operational Visibility",
+    "description": "A centralized analytics platform enabling users to monitor network performance, service delivery metrics, and operational KPIs in real time.",
+    "image": "/dashboard.png",
+    "alt": "AI Intelligence Dashboard",
+    "features": [
+      "Real-time KPI monitoring",
+      "Custom telecom analytics views",
+      "Service fulfilment tracking",
+      "Intelligent alerting & insights"
+    ]
+  },
+  {
+    "id": "chatbot",
+    "badge": "AI Assistant",
+    "title": "Natural Language Chatbot for Inventory & Network Intelligence",
+    "description": "Empower operations teams with an AI-powered assistant capable of extracting real-time inventory and network data through simple natural language queries.",
+    "image": "/chatbot.png",
+    "alt": "AI Chatbot Assistant",
+    "features": [
+      "Query live network inventory instantly",
+      "Extract OSS/BSS data conversationally",
+      "Reduce manual reporting & dependency on SQL",
+      "Context-aware telecom domain intelligence"
+    ]
+  },
+  {
+    "id": "report",
+    "badge": "AI Reporting Engine",
+    "title": "Automated Telecom Reporting & Predictive Insights",
+    "description": "Generate intelligent operational and performance reports powered by AI-driven analytics, eliminating manual reporting workflows.",
+    "image": "/report.png",
+    "alt": "AI Reporting Dashboard",
+    "features": [
+      "Automated daily & monthly reports",
+      "Predictive trend analysis",
+      "Anomaly detection in network metrics",
+      "Export-ready executive summaries"
+    ]
+  }
+]
