@@ -5,8 +5,8 @@ import Image from "next/image";
 const AboutPage = () => {
   return (
     <section className="w-full">
-      <div className="flex py-16 lg:px-4 px-2 flex-col min-h-[50svh] justify-center items-center gap-6 bg-neutral-100">
-        <div className="flex flex-row gap-6 justify-center items-center">
+      <div className="flex py-12 lg:py-16 px-4 flex-col min-h-[50svh] justify-center items-center gap-6 bg-neutral-100">
+        <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
           <SectionHeader
             titleStart="Built on Purposeful"
             highlight="Action, Shared Success, Culture"

@@ -13,7 +13,7 @@ export default function Home() {
       <ClientMarquee/>
       <Vision/>
       <AiProductSection/>
-      <CTA/>
+      <CTA isDialog/>
     </main>
   );
 }
