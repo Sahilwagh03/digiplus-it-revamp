@@ -10,7 +10,7 @@ function Hero({}: Props) {
       <HeroSphere
         sphereSizeFactor={0.6}
         nodeCount={1200}
-        connectionDistance={50}
+        connectionDistance={70}
         mobileNodeCount={500}
         mobileConnectionDistance={100}
         className="absolute inset-0 z-0"

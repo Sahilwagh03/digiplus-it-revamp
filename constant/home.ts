@@ -123,21 +123,28 @@ export const services = [
     ],
   },
 
-  {
-    title: "Application Services",
+    {
+    title: "Cloud & DevOps",
     description:
-      "Sustaining, modernizing, and optimizing enterprise applications to ensure performance, reliability, and long-term business continuity.",
+      "Building resilient, scalable, and automated cloud environments with infrastructure-as-code and modern DevOps practices for continuous delivery.",
 
     deliverables: [
-      "Application Maintenance & Support",
-      "Legacy Modernization",
-      "Platform Migration & Optimization",
-      "Enterprise System Integration",
-      "Performance Tuning & Optimization",
-      "Application Governance & Compliance",
+      "Multi-Cloud Architecture Design",
+      "Containerization & Kubernetes Orchestration",
+      "Infrastructure as Code (Terraform)",
+      "CI/CD Pipeline Engineering",
+      "Observability & Monitoring",
+      "DevSecOps Implementation",
     ],
 
-    technologies: ["SAP", "Salesforce", "ServiceNow", "Oracle"],
+    technologies: [
+      "Amazon Web Services",
+      "Microsoft Azure",
+      "Google Cloud",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+    ],
   },
 
   {
@@ -187,27 +194,20 @@ export const services = [
   },
 
   {
-    title: "Cloud & DevOps",
+    title: "Application Services",
     description:
-      "Building resilient, scalable, and automated cloud environments with infrastructure-as-code and modern DevOps practices for continuous delivery.",
+      "Sustaining, modernizing, and optimizing enterprise applications to ensure performance, reliability, and long-term business continuity.",
 
     deliverables: [
-      "Multi-Cloud Architecture Design",
-      "Containerization & Kubernetes Orchestration",
-      "Infrastructure as Code (Terraform)",
-      "CI/CD Pipeline Engineering",
-      "Observability & Monitoring",
-      "DevSecOps Implementation",
+      "Application Maintenance & Support",
+      "Legacy Modernization",
+      "Platform Migration & Optimization",
+      "Enterprise System Integration",
+      "Performance Tuning & Optimization",
+      "Application Governance & Compliance",
     ],
 
-    technologies: [
-      "Amazon Web Services",
-      "Microsoft Azure",
-      "Google Cloud",
-      "Docker",
-      "Kubernetes",
-      "Terraform",
-    ],
+    technologies: ["SAP", "Salesforce", "ServiceNow", "Oracle"],
   },
 
   {

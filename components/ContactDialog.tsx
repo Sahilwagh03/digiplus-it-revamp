@@ -83,7 +83,7 @@ export default function ContactDialog({ children }: { children: ReactNode }) {
           <div className="mt-4 text-center text-sm text-muted-foreground space-y-2">
             <p className="font-medium text-foreground">Or reach us directly:</p>
 
-            <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex flex-col items-center justify-center gap-2">
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
                 salesmanager@digiplusit.com

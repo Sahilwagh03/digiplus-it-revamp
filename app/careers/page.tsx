@@ -17,7 +17,7 @@ const CareersPage = () => {
           <PrimaryButton>View Open Position</PrimaryButton>
         </div>
       </div>
-      <div className="flex py-16 lg:px-4 px-2 flex-col gap-12 max-w-340 mx-auto">
+      <div className="flex py-6 lg:py-12 px-4 flex-col gap-12 max-w-340 mx-auto">
         <SectionHeader
           titleStart="Why"
           highlight="DigiPlus?"

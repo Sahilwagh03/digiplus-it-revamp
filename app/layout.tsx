@@ -4,6 +4,7 @@ import NavBar from "@/components/nav-bar";
 import Lenis from "@/components/lenis";
 import Footer from "@/components/footer";
 import { Metadata } from "next";
+import ScrollToTop from "@/components/scroll-to-top";
 
 export const metadata: Metadata = {
   title: "DigiPlus IT – AI-Driven Digital Solutions",
@@ -43,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.variable} font-sans antialiased`}>
+        <ScrollToTop />
         <NavBar />
         <Lenis>
           {children}
