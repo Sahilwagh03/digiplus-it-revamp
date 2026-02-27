@@ -5,13 +5,13 @@ import Image from "next/image";
 const AboutPage = () => {
   return (
     <section className="w-full">
-      <div className="flex py-12 lg:py-16 px-4 flex-col min-h-[50svh] justify-center items-center gap-6 bg-neutral-100">
-        <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
+      <div className="flex py-12 lg:py-16 flex-col min-h-[50svh] justify-center items-center gap-6 bg-neutral-100">
+        <div className="flex flex-col lg:flex-row gap-6 justify-center items-center max-w-340 mx-auto px-4">
           <SectionHeader
             titleStart="Built on Purposeful"
             highlight="Action, Shared Success, Culture"
             titleEnd="That Enjoys the Journey"
-            description="At DigiPlus, we turn focused intent into measurable results. We act with clarity, collaborate closely, and build lasting impact—while enjoying the process that drives sustainable success."
+            description="At DigiPlus, we turn focused intent into measurable results. We act with clarity, collaborate closely, and build lasting impact while enjoying the process that drives sustainable success."
             centered={false}
           />
           <div>

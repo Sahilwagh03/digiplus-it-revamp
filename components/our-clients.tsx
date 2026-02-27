@@ -6,7 +6,7 @@ import StatsSection from "./stats-section";
 
 const OurClients = () => {
   return (
-    <section className="w-full max-w-360 mx-auto pt-16 lg:pt-24 px-2 lg:px-6">
+    <section id="clients" className="w-full max-w-360 mx-auto pt-16 lg:pt-24 px-2 lg:px-6">
       <SectionHeader
         badge="Our Clients"
         titleStart="Trusted by"

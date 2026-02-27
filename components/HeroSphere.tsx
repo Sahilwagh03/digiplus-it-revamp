@@ -21,12 +21,12 @@ const HeroSphere: React.FC<HeroSphereProps> = ({
   mobileNodeCount = 150,
   connectionDistance = 55,
   mobileConnectionDistance = 40,
-  rotationDuration = 90,
+  rotationDuration = 30,
   sphereSizeFactor = 0.28,
-  deformStrength = 50,
-  clusterStrength = 0.6,
-  recoverySpeed = 0.04,
-  damping = 0.92,
+  deformStrength = 90,
+  clusterStrength = 0.5,
+  recoverySpeed = 0.02,
+  damping = 0.95,
   className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -67,7 +67,7 @@ const HeroSphere: React.FC<HeroSphereProps> = ({
     const CONN_DIST = isMobile ? mobileConnectionDistance : connectionDistance;
     const CONN_DIST_SQ = CONN_DIST * CONN_DIST;
     const FOV = 500;
-    const ROT_SPEED = (Math.PI * 2) / (rotationDuration * 60);
+    const ROT_SPEED = (Math.PI * 2) / (rotationDuration * 120);
 
     type Node = {
       bx: number; by: number; bz: number;

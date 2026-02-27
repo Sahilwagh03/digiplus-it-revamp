@@ -2,27 +2,27 @@
 
 type TickerItem = {
   client: string;
-  service: string;
+  domain: string;
 };
 
 const TICKER_ITEMS: TickerItem[] = [
-  { client: "Ericsson", service: "Systems Upgrade" },
-  { client: "T-Mobile", service: "Process Orchestration" },
-  { client: "ODIDO", service: "OSS/BSS Modernization" },
-  { client: "Telia Group", service: "Order and Service Delivery" },
-  { client: "Proximus", service: "Service Fulfilment" },
-  { client: "Tele2", service: "Designing BPMN" },
-  { client: "Windtre", service: "Service Orchestration" },
-  { client: "Lenovo", service: "Business Reporting" },
-  { client: "Intel", service: "Reporting Applications" },
-  { client: "Epic Company", service: "Gamification" },
-  { client: "Hungama", service: "User Engagement Systems" },
-  { client: "Nazara", service: "Tech Partner" },
-  { client: "MPL", service: "Gamification" },
-  { client: "ONDC", service: "Tech Partner & Loyalty System Design" },
-  { client: "Postcard.Travel", service: "Digital Enablement" },
-  { client: "OAKS", service: "Ecosystem Design" },
-  { client: "CommuTree", service: "Community Management" },
+  { client: "Ericsson", domain: "Communications Technology & Services" },
+  { client: "T-Mobile", domain: "Telecommunications" },
+  { client: "ODIDO", domain: "Largest Telecommunication Company In The Netherlands" },
+  { client: "Telia Group", domain: "Swedish Multinational Telecommunication Provider" },
+  { client: "Proximus", domain: "Belgian Telecommunications & ICT Company" },
+  { client: "Tele2", domain: "Telecommunications" },
+  { client: "Windtre", domain: "Italian Telecommunication Company" },
+  { client: "Lenovo", domain: "Enterprise Technology" },
+  { client: "Intel", domain: "Enterprise & AI Technology" },
+  { client: "Epic Company - IN10 Media", domain: "Infotainment" },
+  { client: "Hungama", domain: "Music & Infotainment" },
+  { client: "Nazara", domain: "India's Largest Game Publishing House" },
+  { client: "MPL", domain: "Gamification" },
+  { client: "ONDC", domain: "Open Network Digital Commerce Tech Partner" },
+  { client: "Postcard.Travel", domain: "Digital Enablement" },
+  { client: "OAKS", domain: "EdTech" },
+  { client: "CommuTree", domain: "Community Management" },
 ];
 
 export default function ClientMarquee() {
@@ -37,7 +37,7 @@ export default function ClientMarquee() {
           >
             <span className="w-2 h-2 bg-emerald-500 rounded-full" />
             <span className="text-sm text-neutral-700">
-              <strong className="font-medium">{item.client}</strong> — {item.service}
+              <strong className="font-medium">{item.client}</strong> — {item.domain}
             </span>
           </div>
         ))}

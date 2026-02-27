@@ -1,3 +1,9 @@
+import ChatMockUp from "@/components/chat-mockup";
+import DashboardMockUp from "@/components/dashboard-mockup";
+import DiscoveryPanel from "@/components/discovery-panel";
+import AiReportsMockUp from "@/components/report-mockup";
+import { title } from "process";
+
 export const partners = [
   {
     name: "Ericsson",
@@ -123,7 +129,7 @@ export const services = [
     ],
   },
 
-    {
+  {
     title: "Cloud & DevOps",
     description:
       "Building resilient, scalable, and automated cloud environments with infrastructure-as-code and modern DevOps practices for continuous delivery.",
@@ -343,86 +349,117 @@ export const insightsData = [
   },
 ];
 
-
 export const standardsData = [
   {
-    "badge": "TM FORUM",
-    "title": "TM Forum Open APIs",
-    "description": "Certified implementation partner for TMF Open API suite. We architect API-first telecom platforms using TMF639, TMF641, and 40+ APIs.",
-    "linkText": "View API Portfolio",
-    "linkHref": "#"
+    badge: "TM FORUM",
+    title: "TM Forum Open APIs",
+    description:
+      "Expert implementation for TMF Open API suite. We architect API-first telecom platforms using TMF639, TMF641, and 40+ APIs.",
+
   },
   {
-    "badge": "ODA",
-    "title": "ODA Framework",
-    "description": "Full-stack ODA component development aligned with Canvas 2.0. Microservices architecture for plug-and-play integration.",
-    "linkText": "Explore ODA Solutions",
-    "linkHref": "#"
+    badge: "ODA",
+    title: "ODA Framework",
+    description:
+      "Full-stack ODA component development aligned with Canvas 2.0. Microservices architecture for plug-and-play integration.",
+
   },
   {
-    "badge": "SID",
-    "title": "SID Model Expertise",
-    "description": "Deep SID-based data modeling for OSS/BSS. Semantic consistency across Customer, Product, Service, and Resource domains.",
-    "linkText": "Learn About SID",
-    "linkHref": "#"
-  },
-    {
-    "badge": "ISO",
-    "title": "ISO Compliance & Governance",
-    "description": "ISO-aligned security, quality, and operational frameworks ensuring structured governance, risk management, and process excellence.",
-    "linkText": "View ISO Framework",
-    "linkHref": "#"
+    badge: "SID",
+    title: "SID Model Expertise",
+    description:
+      "Deep SID-based data modeling for OSS/BSS. Semantic consistency across Customer, Product, Service, and Resource domains.",
+
   },
   {
-    "badge": "CLOUD PARTNERS",
-    "title": "AWS & Azure Partners",
-    "description": "Certified cloud partnerships delivering scalable, secure, and high-availability telecom workloads on AWS and Microsoft Azure.",
-    "linkText": "Explore Cloud Capabilities",
-    "linkHref": "#"
-  }
-]
+    badge: "ISO",
+    title: "ISO Compliance & Governance",
+    description:
+      "ISO-aligned security, quality, and operational frameworks ensuring structured governance, risk management, and process excellence.",
+
+  },
+  {
+    badge: "CLOUD PARTNERS",
+    title: "AWS & Azure Partners",
+    description:
+      "Certified cloud partnerships delivering scalable, secure, and high-availability telecom workloads on AWS and Microsoft Azure.",
+  },
+];
 
 export const aiProducts = [
   {
-    "id": "dashboard",
-    "badge": "Intelligence Dashboard",
-    "title": "Unified Data Dashboard for Operational Visibility",
-    "description": "A centralized analytics platform enabling users to monitor network performance, service delivery metrics, and operational KPIs in real time.",
-    "image": "/dashboard.png",
-    "alt": "AI Intelligence Dashboard",
-    "features": [
+    id: "dashboard",
+    badge: "Intelligence Dashboard",
+    title: {
+      titleStart: "Unified",
+      highlight: "Data Dashboard",
+      titleEnd: "for Operational Visibility",
+    },
+    description:
+      "A centralized analytics platform enabling users to monitor network performance, service delivery metrics, and operational KPIs in real time.",
+    component: <DashboardMockUp />,
+    alt: "AI Intelligence Dashboard",
+    features: [
       "Real-time KPI monitoring",
       "Custom telecom analytics views",
       "Service fulfilment tracking",
-      "Intelligent alerting & insights"
-    ]
+      "Intelligent alerting & insights",
+    ],
   },
   {
-    "id": "chatbot",
-    "badge": "AI Assistant",
-    "title": "Natural Language Chatbot for Inventory & Network Intelligence",
-    "description": "Empower operations teams with an AI-powered assistant capable of extracting real-time inventory and network data through simple natural language queries.",
-    "image": "/chatbot.png",
-    "alt": "AI Chatbot Assistant",
-    "features": [
+    id: "chatbot",
+    badge: "AI Assistant",
+    title: {
+      titleStart: "Natural",
+      highlight: "Language Chatbot",
+      titleEnd: "for Inventory & Network Intelligence",
+    },
+    description:
+      "Empower operations teams with an AI-powered assistant capable of extracting real-time inventory and network data through simple natural language queries.",
+    component: <ChatMockUp />,
+    alt: "AI Chatbot Assistant",
+    features: [
       "Query live network inventory instantly",
       "Extract OSS/BSS data conversationally",
       "Reduce manual reporting & dependency on SQL",
-      "Context-aware telecom domain intelligence"
-    ]
+      "Context-aware telecom domain intelligence",
+    ],
   },
   {
-    "id": "report",
-    "badge": "AI Reporting Engine",
-    "title": "Automated Telecom Reporting & Predictive Insights",
-    "description": "Generate intelligent operational and performance reports powered by AI-driven analytics, eliminating manual reporting workflows.",
-    "image": "/report.png",
-    "alt": "AI Reporting Dashboard",
-    "features": [
+    id: "report",
+    badge: "AI Reporting Engine",
+    title: {
+      highlight: "Automated Telecom Reporting",
+      titleEnd: "& Predictive Insights",
+    },
+    description:
+      "Generate intelligent operational and performance reports powered by AI-driven analytics, eliminating manual reporting workflows.",
+    component: <AiReportsMockUp />,
+    alt: "AI Reporting Dashboard",
+    features: [
       "Automated daily & monthly reports",
       "Predictive trend analysis",
       "Anomaly detection in network metrics",
-      "Export-ready executive summaries"
-    ]
-  }
-]
+      "Export-ready executive summaries",
+    ],
+  },
+  {
+    id: "network360",
+    badge: "Network 360 AI",
+    title: {
+      titleStart: "Autonomous Network Inventory",
+      highlight: "Reconciliation",
+      titleEnd: "& Discovery",
+    },
+    description:
+      "An AI-powered platform that continuously discovers, reconciles, and validates your entire multi-vendor network inventory — eliminating audit cycles and delivering real-time accuracy at unprecedented scale.",
+    component: <DiscoveryPanel />,
+    alt: "Network 360 AI Discovery",
+    features: [
+      "10× faster network element discovery vs legacy tools",
+      "99.7% accuracy across 80,000+ network elements",
+      "40+ vendors — Nokia, Ericsson, Huawei, Cisco & more",
+      "85% reduction in manual audit-cycle effort",
+    ],
+  },
+];

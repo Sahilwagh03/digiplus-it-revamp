@@ -102,14 +102,6 @@ export default function Footer() {
             </Link>
 
             <Link
-              href="https://twitter.com/digiplus_it"
-              target="_blank"
-              className="flex items-center gap-2 hover:text-neutral-900 transition-colors"
-            >
-              <Twitter size={16} /> Twitter
-            </Link>
-
-            <Link
               href="mailto:salesman@digiplusit.com"
               className="flex items-center gap-2 hover:text-neutral-900 transition-colors"
             >

@@ -56,7 +56,7 @@ export default function Navbar(): JSX.Element {
       {/* ================= NAVBAR ================= */}
       <nav
         className={cn(
-          "sticky top-0 left-0 right-0 z-50 h-16 flex items-center",
+          "sticky top-0 left-0 right-0 z-50 h-14 flex items-center",
           "bg-white/90 backdrop-blur-xl transition-all duration-500",
           scrolled ? "border-b shadow-sm" : "border-b border-black/5",
         )}
