@@ -284,7 +284,7 @@ const HeroSphere: React.FC<HeroSphereProps> = ({
     recoverySpeed, damping,
   ]);
 
-  return <canvas ref={canvasRef} className={`w-full h-full block ${className}`} />;
+  return <canvas ref={canvasRef} className={`w-full h-full hidden lg:block ${className}`} />;
 };
 
 export default HeroSphere;

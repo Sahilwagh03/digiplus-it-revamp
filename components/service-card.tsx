@@ -25,7 +25,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
       <div className="flex flex-col flex-1 p-8">
         {/* Title */}
-        <h2 className="text-2xl font-semibold text-neutral-900 mb-3">
+        <h2 className="gradient-text text-2xl font-semibold mb-3">
           {title}
         </h2>
 

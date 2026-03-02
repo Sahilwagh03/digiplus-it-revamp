@@ -9,7 +9,7 @@ import Vision from "@/components/vision";
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Hero />
       <OurClients/>
       <ClientMarquee/>

@@ -171,11 +171,11 @@ export default function ServicesHeroCanvas() {
 
     function build() {
       blocks = Array.from(
-        { length: window.innerWidth < 768 ? 18 : 40 },
+        { length: window.innerWidth < 768 ? 8 : 16 },
         () => new Block(),
       );
 
-      particles = Array.from({ length: 140 }, () => new Particle());
+      particles = Array.from({ length: 80 }, () => new Particle());
     }
 
     function tick() {

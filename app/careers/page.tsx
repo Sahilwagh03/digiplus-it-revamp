@@ -2,6 +2,7 @@ import CTA from "@/components/CTA";
 import PrimaryButton from "@/components/primary-button";
 import SectionHeader from "@/components/SectionHeader";
 import WhyJoinSection from "@/components/why-join-us";
+import Link from "next/link";
 
 const CareersPage = () => {
   return (
@@ -14,7 +15,9 @@ const CareersPage = () => {
             titleEnd="With DigiPlus"
             description="Join a team solving the hardest problems in telecom with AI, cloud, and cutting-edge tech."
           />
-          <PrimaryButton>View Open Position</PrimaryButton>
+          <Link href="https://www.linkedin.com/company/digiplusit/jobs/" target="_blank">
+            <PrimaryButton>View Open Position</PrimaryButton>
+          </Link>
         </div>
       </div>
       <div className="flex py-6 lg:py-12 px-4 flex-col gap-12 max-w-340 mx-auto">
@@ -23,9 +26,14 @@ const CareersPage = () => {
           highlight="DigiPlus?"
           centered={false}
         />
-        <WhyJoinSection/>
+        <WhyJoinSection />
       </div>
-      <CTA title="Don't See a Perfect Fit?" description="We're always interested in exceptional talent. Send us your resume and  let's talk about opportunities." buttonText="Send Resume" email="hr@digiplusit.com"/>
+      <CTA
+        title="Don't See a Perfect Fit?"
+        description="We're always interested in exceptional talent. Send us your resume and  let's talk about opportunities."
+        buttonText="Send Resume"
+        email="careers@digiplusit.com"
+      />
     </section>
   );
 };

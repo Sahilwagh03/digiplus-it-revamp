@@ -106,7 +106,7 @@ const ChatMockUp: React.FC = () => {
               />
               <button
                 type="button"
-                className="w-6 h-6 rounded-full bg-gradient-to-br from-[#6C5CE7] to-[#E84393] flex items-center justify-center text-white text-xs"
+                className="w-6 h-6 rounded-full bg-linear-to-br from-[#6C5CE7] to-[#E84393] flex items-center justify-center text-white text-xs"
               >
                 ↑
               </button>

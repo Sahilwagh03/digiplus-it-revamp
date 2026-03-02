@@ -31,6 +31,12 @@ export const partners = [
     alt: "Odido Logo",
   },
   {
+    name:"Telia Company",
+    blackLogo:"/partners-logo/telia-black.svg",
+    whiteLogo:"/partners-logo/telia-white.svg",
+    alt:"Telia Company Logo",
+  },
+  {
     name: "WindTre",
     blackLogo: "/partners-logo/windtre-black.svg",
     whiteLogo: "/partners-logo/windtre-white.svg",

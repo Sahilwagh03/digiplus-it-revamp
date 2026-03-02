@@ -14,7 +14,7 @@ const LatestInsights = () => {
         />
         <Link href="/insights">
           <PrimaryButton className="justify-center lg:justify-start h-fit">
-            All Insights
+            Explore Insights
           </PrimaryButton>
         </Link>
       </div>

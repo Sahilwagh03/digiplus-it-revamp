@@ -24,8 +24,8 @@ function Hero({}: Props) {
           </h1>
           <p className="text-sm lg:text-lg leading-7 text-gray-600">
             We bridge legacy systems to autonomous futures with AI-first
-            architecture, TM Forum expertise, and engineering teams
-            trusted by tier-1 telecom and enterprise leaders worldwide.
+            architecture, TM Forum expertise, and engineering teams trusted by
+            tier-1 telecom and enterprise leaders worldwide.
           </p>
           <Link
             href="/services"
@@ -66,8 +66,8 @@ function Hero({}: Props) {
               <span className="font-semibold text-gray-900">Ericsson</span>,{" "}
               <span className="font-semibold text-gray-900">T-Mobile</span>,{" "}
               <span className="font-semibold text-gray-900">ODIDO</span>,{" "}
-              <span className="font-semibold text-gray-900">Intel</span>{" "}
-              &amp; 15+ more
+              <span className="font-semibold text-gray-900">Intel</span> &amp;
+              15+ more
             </p>
           </div>
         </div>
@@ -85,17 +85,16 @@ function Hero({}: Props) {
         </div>
       </div>
       <div className="absolute right-0 top-0 z-0 h-full hidden lg:flex overflow-hidden cursor-pointer">
-          <div className="w-[140%] h-full translate-x-[35%]">
-      <HeroSphere
-        sphereSizeFactor={0.6}
-        nodeCount={1200}
-        connectionDistance={70}
-        mobileNodeCount={500}
-        mobileConnectionDistance={100}
-      />
-
-          </div>
+        <div className="w-[140%] h-full translate-x-[35%]">
+          <HeroSphere
+            sphereSizeFactor={0.6}
+            nodeCount={1200}
+            connectionDistance={70}
+            mobileNodeCount={500}
+            mobileConnectionDistance={100}
+          />
         </div>
+      </div>
     </section>
   );
 }
