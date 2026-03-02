@@ -3,10 +3,22 @@ import Link from "next/link";
 import { CircleArrowDown, MoveRight } from "lucide-react";
 import NetworkSphere from "./network-sphere";
 import HeroSphere from "./HeroSphere";
+import { useEffect, useState } from "react";
 
-type Props = {};
+function Hero() {
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
-function Hero({}: Props) {
+  useEffect(() => {
+    const checkDevice = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+
+    checkDevice(); // initial check
+    window.addEventListener("resize", checkDevice);
+
+    return () => window.removeEventListener("resize", checkDevice);
+  }, []);
+
   return (
     <section className="relative h-auto lg:h-[96.5vh] w-full px-4 lg:px-8 overflow-x-hidden">
       <div className="pointer-events-none relative w-full h-full grid lg:grid-cols-2 lg:gap-12 justify-between items-center max-w-340 mx-auto">
@@ -84,17 +96,19 @@ function Hero({}: Props) {
           <CircleArrowDown className="cursor-pointer w-4 h-4 text-(--navy)/70" />
         </div>
       </div>
-      <div className="absolute right-0 top-0 z-0 h-full hidden lg:flex overflow-hidden cursor-pointer">
-        <div className="w-[140%] h-full translate-x-[35%]">
-          <HeroSphere
-            sphereSizeFactor={0.6}
-            nodeCount={1200}
-            connectionDistance={70}
-            mobileNodeCount={500}
-            mobileConnectionDistance={100}
-          />
+      {!isMobile && (
+        <div className="absolute right-0 top-0 z-0 h-full hidden lg:flex overflow-hidden cursor-pointer">
+          <div className="w-[140%] h-full translate-x-[35%]">
+            <HeroSphere
+              sphereSizeFactor={0.6}
+              nodeCount={1200}
+              connectionDistance={70}
+              mobileNodeCount={500}
+              mobileConnectionDistance={100}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
