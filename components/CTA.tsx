@@ -14,7 +14,7 @@ interface CTAProps {
 }
 
 const CTA = ({
-  title = "Ready to Transform Your Operations?",
+  title = "Ready to Transform Your Business?",
   description = "Let’s discuss how DigiPlus can accelerate your digital transformation journey.",
   buttonText = "Get Started",
   isDialog = false,

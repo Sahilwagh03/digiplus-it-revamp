@@ -5,6 +5,7 @@ import Lenis from "@/components/lenis";
 import Footer from "@/components/footer";
 import { Metadata } from "next";
 import ScrollToTop from "@/components/scroll-to-top";
+import MouseTrail from "@/components/MouseTrail";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://digiplusit.co.in"),
@@ -81,6 +82,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.variable} font-sans antialiased`}>
+        <MouseTrail />
         <ScrollToTop />
         <NavBar />
         <Lenis>{children}</Lenis>

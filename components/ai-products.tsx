@@ -4,6 +4,7 @@ import SectionHeader from "./SectionHeader";
 import { aiProducts } from "@/constant/home";
 import { motion, useInView, easeOut } from "framer-motion";
 import { useRef } from "react";
+import { CometCard } from "./ui/comet-card";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -105,14 +106,9 @@ const AnimatedProductCard = ({ product, index }: AnimatedProductCardProps) => {
           variants={fadeUp}
           transition={{ duration: 0.5, delay: 0.15 }}
         >
-          {product.title.titleStart && (
-            <span>{product.title.titleStart} </span>
-          )}
+          {product.title.titleStart && <span>{product.title.titleStart} </span>}
           {product.title.highlight && (
-            <span className="gradient-text">
-              {" "}
-              {product.title.highlight}{" "}
-            </span>
+            <span className="gradient-text"> {product.title.highlight} </span>
           )}
           {product.title.titleEnd && <span>{product.title.titleEnd}</span>}
         </motion.h3>
@@ -148,19 +144,21 @@ const AnimatedProductCard = ({ product, index }: AnimatedProductCardProps) => {
         </motion.ul>
       </motion.div>
 
-      {/* IMAGE SIDE */}
-      <motion.div
-        className={isReversed ? "order-2 lg:order-1" : ""}
-        variants={imageVariant}
-        transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-      >
+      <CometCard translateDepth={10} rotateDepth={8.75}>
+        {/* IMAGE SIDE */}
         <motion.div
-          className="relative rounded-xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.08)]"
-          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+          className={isReversed ? "order-2 lg:order-1" : ""}
+          variants={imageVariant}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
         >
-          {product.component}
+          <motion.div
+            className="relative rounded-xl overflow-hidden"
+            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+          >
+            {product.component}
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </CometCard>
     </motion.div>
   );
 };
@@ -172,7 +170,10 @@ const AiProductSection = () => {
   const headerInView = useInView(headerRef, { once: true, amount: 0.2 });
 
   return (
-    <section id="ai-products" className="w-full max-w-7xl mx-auto py-16 lg:py-24 px-4 lg:px-6">
+    <section
+      id="ai-products"
+      className="w-full max-w-7xl mx-auto py-16 lg:py-24 px-4 lg:px-6"
+    >
       <div className="flex flex-col gap-8 lg:gap-16">
         {/* Animated Header */}
         <motion.div

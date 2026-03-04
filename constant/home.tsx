@@ -31,10 +31,10 @@ export const partners = [
     alt: "Odido Logo",
   },
   {
-    name:"Telia Company",
-    blackLogo:"/partners-logo/telia-black.svg",
-    whiteLogo:"/partners-logo/telia-white.svg",
-    alt:"Telia Company Logo",
+    name: "Telia Company",
+    blackLogo: "/partners-logo/telia-black.svg",
+    whiteLogo: "/partners-logo/telia-white.svg",
+    alt: "Telia Company Logo",
   },
   {
     name: "WindTre",
@@ -278,6 +278,29 @@ export const services = [
 
     technologies: ["Jira", "Confluence", "Microsoft Project", "ServiceNow"],
   },
+  {
+    title: "Cybersecurity & Compliance",
+    description:
+      "Protecting digital assets and ensuring regulatory compliance through proactive security measures, threat mitigation, and governance frameworks.",
+
+    deliverables: [
+      "Security Architecture & Hardening",
+      "Threat Detection & Incident Response",
+      "Compliance (GDPR, ISO, SOC, etc.)",
+      "Vulnerability Assessments",
+      "Identity & Access Management (IAM)",
+      "Security Automation & Monitoring",
+    ],
+
+    technologies: [
+      "AWS Security Hub",
+      "Azure Security Center",
+      "Splunk",
+      "CrowdStrike",
+      "Okta",
+      "HashiCorp Vault",
+    ],
+  },
 ];
 
 export const insightsData = [
@@ -361,28 +384,24 @@ export const standardsData = [
     title: "TM Forum Open APIs",
     description:
       "Expert implementation for TMF Open API suite. We architect API-first telecom platforms using TMF639, TMF641, and 40+ APIs.",
-
   },
   {
     badge: "ODA",
     title: "ODA Framework",
     description:
       "Full-stack ODA component development aligned with Canvas 2.0. Microservices architecture for plug-and-play integration.",
-
   },
   {
     badge: "SID",
     title: "SID Model Expertise",
     description:
       "Deep SID-based data modeling for OSS/BSS. Semantic consistency across Customer, Product, Service, and Resource domains.",
-
   },
   {
     badge: "ISO",
     title: "ISO Compliance & Governance",
     description:
       "ISO-aligned security, quality, and operational frameworks ensuring structured governance, risk management, and process excellence.",
-
   },
   {
     badge: "CLOUD PARTNERS",

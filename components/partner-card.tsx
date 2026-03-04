@@ -13,7 +13,7 @@ interface PartnerCardProps {
 
 const PartnerCard = ({ blackLogo, whiteLogo, alt , className, imageClassName, darkImageClassName, whiteImageClassName }: PartnerCardProps) => {
   return (
-    <div className={cn("group relative bg-[#F9FAFB] hover:bg-black transition-all duration-500 flex justify-center items-center py-8 px-4 rounded-4xl cursor-pointer  lg:min-w-64", className)}>
+    <div className={cn("group relative bg-[#F9FAFB] hover:bg-black transition-all duration-500 flex justify-center items-center py-8 px-4 rounded-4xl lg:min-w-64", className)}>
 
       {/* Logo Wrapper */}
       <div className="relative overflow-hidden h-9 w-30 flex items-center justify-center">

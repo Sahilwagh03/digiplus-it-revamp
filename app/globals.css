@@ -190,3 +190,46 @@ body {
 .gradient-bg-brand {
   background: var(--gradient-brand);
 }
+
+
+.phone-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.375rem;
+  padding: 0 0.75rem;
+}
+
+.phone-input:focus-within {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 0px;
+}
+
+.phone-input input {
+  flex: 1;
+  background: transparent;
+  outline: none;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  border: none;
+}
+
+.phone-input .PhoneInputCountrySelect {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.mouse-trail-particle {
+  position: fixed; /* keep fixed */
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  transition: 
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+  z-index: 999999;
+  will-change: transform, opacity;
+}
